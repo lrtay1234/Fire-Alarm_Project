@@ -243,9 +243,10 @@ Delay(1000);
 	          	  Humidity = (float)Rh_byte1;
 
 
-	          	  // part 2 display fire above 70 degree Farenheight
-	          	  if (Temperature_F >= 79.0)
+	          	  // part 2 display fire above 75 degree Farenheight
+	          	  if (Temperature_F >= 75.0)
 	          	  {
+					  // Red LED turns on
 	    	      	  HAL_GPIO_WritePin(Yellow_LED_GPIO_Port, Yellow_LED_Pin, 0);
 	          		  HAL_GPIO_WritePin(Red_LED_GPIO_Port, Red_LED_Pin, 1);
 	          		  HAL_GPIO_WritePin(Green_LED_GPIO_Port, Green_LED_Pin, 0);
@@ -290,7 +291,7 @@ Delay(1000);
 		        	   // Update CCR based on duty cycle
 		        	   int resetValue = (int) (dutyCycle * PWM_PERIOD);
 		        	   TIM3->CCR3 = resetValue;
-		        	   dutyCycle += 0.001; // increase duty cycle by 10%
+		        	   dutyCycle += 0.001; // increase duty cycle by 1%
 		        	   HAL_Delay(5); // wait 100 ms before updating again
 		        	  }
 
@@ -312,7 +313,7 @@ Delay(1000);
 		        	   // Update CCR based on duty cycle
 		        	   int resetValue = (int) (dutyCycle * PWM_PERIOD);
 		        	   TIM3->CCR3 = resetValue;
-		        	   dutyCycle -= 0.001; // increase duty cycle by 10%
+		        	   dutyCycle -= 0.001; // decrease duty cycle by 1%
 		        	   HAL_Delay(5); // wait 100 ms before updating again
 		        	  }
 
@@ -879,3 +880,4 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+
